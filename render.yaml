@@ -3,12 +3,6 @@ services:
     name: aplikasi-telur
     env: docker
     plan: free
-    buildCommand: |
-      composer install --no-dev --optimize-autoloader
-      php artisan key:generate
-      php artisan migrate --force
-    envVars:
-      - key: APP_ENV
-        value: production
-      - key: APP_DEBUG
-        value: false
+    buildCommand: ""
+    startCommand: ""
+    autoDeploy: true
