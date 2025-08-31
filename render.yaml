@@ -1,10 +1,20 @@
 services:
   - type: web
     name: aplikasi-telur
-    runtime: php
-    buildCommand: |
-      composer install --no-dev --optimize-autoloader
-      php artisan key:generate
-      php artisan migrate --force
-    startCommand: vendor/bin/heroku-php-apache2 public/
+    runtime: docker
     plan: free
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        sync: false
+      - key: DB_CONNECTION
+        value: mysql  # atau pgsql jika pakai postgres
+      - key: DB_HOST
+      - key: DB_PORT
+      - key: DB_DATABASE
+      - key: DB_USERNAME
+      - key: DB_PASSWORD
+    autoDeploy: true
