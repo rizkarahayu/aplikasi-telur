@@ -1,29 +1,34 @@
-FROM php:8.1-fpm-alpine
-
-WORKDIR /var/www/html
+FROM php:8.2-apache
 
 # Install dependencies
-RUN apk add --no-cache \
-    openssl \
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libonig-dev \
+    libxml2-dev \
     zip \
     unzip \
-    libzip-dev \
-    zip \
+    git \
     curl \
-    && docker-php-ext-install pdo_mysql zip
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Enable Apache Rewrite Module
+RUN a2enmod rewrite
 
-# Copy code
+# Copy project files
+WORKDIR /var/www/html
 COPY . .
 
-# Install dependencies
+# Install Composer
+COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-EXPOSE 8000
+# Expose port 80
+EXPOSE 80
 
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+# Start Apache
+CMD ["apache2-foreground"]

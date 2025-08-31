@@ -7,25 +7,8 @@ services:
       composer install --no-dev --optimize-autoloader
       php artisan key:generate
       php artisan migrate --force
-    startCommand: vendor/bin/heroku-php-apache2 public/
     envVars:
-      - key: APP_KEY
-        value: base64:xxxxxxxxxxxxxxxxxx
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: false
-      - key: APP_URL
-        value: https://aplikasi-telur.onrender.com
-      - key: DB_CONNECTION
-        value: mysql
-      - key: DB_HOST
-        value: your-db-host
-      - key: DB_PORT
-        value: 3306
-      - key: DB_DATABASE
-        value: your-db-name
-      - key: DB_USERNAME
-        value: your-db-user
-      - key: DB_PASSWORD
-        value: your-db-password
