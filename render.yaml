@@ -2,20 +2,9 @@ services:
   - type: web
     name: aplikasi-telur
     env: php
-    plan: free
     buildCommand: |
       composer install --no-dev --optimize-autoloader
-      php artisan key:generate --force
+      php artisan key:generate
       php artisan migrate --force
-      chmod -R 775 storage bootstrap/cache
-    startCommand: |
-      php artisan serve --host 0.0.0.0 --port $PORT
-    envVars:
-      - key: APP_ENV
-        value: production
-      - key: APP_KEY
-        sync: false   # nanti isi manual di dashboard
-      - key: APP_DEBUG
-        value: false
-      - key: APP_URL
-        value: https://aplikasi-telur.onrender.com
+    startCommand: vendor/bin/heroku-php-apache2 public/
+    plan: free
