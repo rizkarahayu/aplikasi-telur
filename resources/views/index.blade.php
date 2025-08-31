@@ -5,7 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 p-8">
-    {{-- <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6">
+    <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6">
         <h1 class="text-2xl font-bold mb-6">📝 Input Penjualan</h1>
 
         @if(session('success'))
@@ -218,7 +218,6 @@
                 @endforeach
             </tbody>
         </table>
-    </div> --}}
-    <h1>Halloo2</h1>
+    </div>
 </body>
 </html>
