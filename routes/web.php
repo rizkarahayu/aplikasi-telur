@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan.index');
+
 });
 use App\Http\Controllers\PenjualanController;
 
-Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan.index');
 Route::post('/penjualan', [PenjualanController::class, 'store'])->name('penjualan.store');
